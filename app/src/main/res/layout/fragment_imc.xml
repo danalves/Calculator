@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:paddingTop="30dp">
+        android:paddingTop="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -101,13 +101,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Seu IMC é:" />
+            tools:text="26 - IDEAL" />
 
         <ImageView
             android:id="@+id/ivIMC"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/magreza"/>
+            android:src="@drawable/normal"/>
 
     </LinearLayout>
 
