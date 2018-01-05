@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.logonrm.calculator.fragments.CalcFragment;
 import com.example.logonrm.calculator.fragments.IMCFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -32,14 +33,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -93,7 +94,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_imc:
                 changeFragment(new IMCFragment());
                 break;
-        }
+            case R.id.nav_calculadora:
+                changeFragment(new CalcFragment());
+                break;        }
 
         /*if (id == R.id.nav_imc) {
             // Handle the camera action
