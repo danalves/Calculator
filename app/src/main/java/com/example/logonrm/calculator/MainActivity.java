@@ -22,6 +22,7 @@ import android.view.MenuItem;
 
 import com.example.logonrm.calculator.fragments.CalcFragment;
 import com.example.logonrm.calculator.fragments.IMCFragment;
+import com.example.logonrm.calculator.fragments.MedidasFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,7 +97,12 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_calculadora:
                 changeFragment(new CalcFragment());
-                break;        }
+                break;
+            case R.id.nav_medida:
+                changeFragment(new MedidasFragment());
+                break;
+
+        }
 
         /*if (id == R.id.nav_imc) {
             // Handle the camera action

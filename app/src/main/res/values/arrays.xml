@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="medidas">
+        <item>Quilômetro</item>
+        <item>Metro</item>
+        <item>Centímetro</item>
+        <item>Milímetro</item>
+        <item>Micrômetro</item>
+        <item>Nanômetro</item>
+        <item>Milha</item>
+        <item>Jarda</item>
+        <item>Pé</item>
+        <item>Polegada</item>
+        <item>Milha Náutica</item>
+    </string-array>
+</resources>
