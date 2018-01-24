@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -22,6 +23,9 @@ public class MedidasFragment extends Fragment {
     EditText etMedida2;
     Spinner spMedidasDe;
     Spinner spMedidasPara;
+    boolean converteu = false;
+
+    Double medida;
 
     public MedidasFragment() {
         // Required empty public constructor
@@ -38,6 +42,9 @@ public class MedidasFragment extends Fragment {
         spMedidasDe = (Spinner) view.findViewById(R.id.spMedidasDe);
         spMedidasPara = (Spinner) view.findViewById(R.id.spMedidasPara);
 
+        etMedida1.setText("0.0");
+        etMedida2.setText("0.0");
+
         etMedida1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -46,7 +53,12 @@ public class MedidasFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                converter1();
+                if (converteu) {
+                    converteu = false;
+                } else {
+                    converteu = true;
+                    converter1();
+                }
             }
 
             @Override
@@ -63,11 +75,50 @@ public class MedidasFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                converter2();
+                if (converteu) {
+                    converteu = false;
+                } else {
+                    converteu = true;
+                    converter2();
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        spMedidasDe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (converteu) {
+                    converteu = false;
+                } else {
+                    converteu = true;
+                    converter2();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spMedidasPara.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (converteu) {
+                    converteu = false;
+                } else {
+                    converteu = true;
+                    converter1();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -77,74 +128,111 @@ public class MedidasFragment extends Fragment {
 
     private void converter1() {
 
-        Double metro = 0.0;
+        if (!etMedida1.getText().toString().isEmpty()) {
+            medida = Double.parseDouble(etMedida1.getText().toString());
 
-        if(spMedidasDe.getSelectedItem().toString().equals("Quilômetro")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Metro")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Centímetro")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 0.01;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Milímetro")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 0.001;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Micrômetro")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Nanômetro")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Milha")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Jarda")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Pé")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Polegada")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
-        }else if(spMedidasDe.getSelectedItem().toString().equals("Milha Náutica")){
-            metro = Double.parseDouble(etMedida1.getText().toString()) * 1000;
+            Double metro = 0.0;
+
+            if (spMedidasDe.getSelectedItem().toString().equals("Quilômetro")) {
+                metro = medida * 1000;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Metro")) {
+                metro = medida * 1;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Centímetro")) {
+                metro = medida * 0.01;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Milímetro")) {
+                metro = medida * 0.001;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Milha")) {
+                metro = medida * 1609.34;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Jarda")) {
+                metro = medida * 0.9144;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Pé")) {
+                metro = medida * 0.3048;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Polegada")) {
+                metro = medida * 0.0254;
+            }
+
+            Double resul = 0.0;
+
+            if (spMedidasPara.getSelectedItem().toString().equals("Quilômetro")) {
+                resul = metro * 0.001;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Metro")) {
+                resul = metro * 1;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Centímetro")) {
+                resul = metro * 100;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Milímetro")) {
+                resul = metro * 1000;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Milha")) {
+                resul = metro * 0.000621371;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Jarda")) {
+                resul = metro * 1.09361;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Pé")) {
+                resul = metro * 3.28084;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Polegada")) {
+                resul = metro * 39.3701;
+            }
+
+            etMedida2.setText(resul.toString());
+
+        } else{
+            converteu = false;
         }
-
-        Double resul = 0.0;
-
-        if(spMedidasPara.getSelectedItem().toString().equals("Quilômetro")){
-            resul = metro * 0.001;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Metro")){
-            resul = metro * 1;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Centímetro")){
-            resul = metro * 100;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Milímetro")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Micrômetro")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Nanômetro")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Milha")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Jarda")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Pé")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Polegada")){
-            resul = metro * 1000;
-        }else if(spMedidasPara.getSelectedItem().toString().equals("Milha Náutica")){
-            resul = metro * 1000;
-        }
-
-        etMedida2.setText(resul.toString());
-
-
-
-
-
-
-
-
-
 
 
     }
 
     private void converter2() {
 
+        if (!etMedida2.getText().toString().isEmpty()) {
+            medida = Double.parseDouble(etMedida2.getText().toString());
+
+            Double metro = 0.0;
+
+            if (spMedidasPara.getSelectedItem().toString().equals("Quilômetro")) {
+                metro = medida * 1000;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Metro")) {
+                metro = medida * 1;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Centímetro")) {
+                metro = medida * 0.01;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Milímetro")) {
+                metro = medida * 0.001;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Milha")) {
+                metro = medida * 1609.34;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Jarda")) {
+                metro = medida * 0.9144;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Pé")) {
+                metro = medida * 0.3048;
+            } else if (spMedidasPara.getSelectedItem().toString().equals("Polegada")) {
+                metro = medida * 0.0254;
+            }
+
+            Double resul = 0.0;
+
+            if (spMedidasDe.getSelectedItem().toString().equals("Quilômetro")) {
+                resul = metro * 0.001;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Metro")) {
+                resul = metro * 1;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Centímetro")) {
+                resul = metro * 100;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Milímetro")) {
+                resul = metro * 1000;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Milha")) {
+                resul = metro * 0.000621371;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Jarda")) {
+                resul = metro * 1.09361;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Pé")) {
+                resul = metro * 3.28084;
+            } else if (spMedidasDe.getSelectedItem().toString().equals("Polegada")) {
+                resul = metro * 39.3701;
+            }
+
+            etMedida1.setText(resul.toString());
+
+        } else{
+
+            converteu = false;
+
+        }
     }
+
 
 }

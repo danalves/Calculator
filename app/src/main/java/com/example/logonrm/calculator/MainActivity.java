@@ -23,6 +23,8 @@ import android.view.MenuItem;
 import com.example.logonrm.calculator.fragments.CalcFragment;
 import com.example.logonrm.calculator.fragments.IMCFragment;
 import com.example.logonrm.calculator.fragments.MedidasFragment;
+import com.example.logonrm.calculator.fragments.PesosFragment;
+import com.example.logonrm.calculator.fragments.TemperaturasFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -100,6 +102,12 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_medida:
                 changeFragment(new MedidasFragment());
+                break;
+            case R.id.nav_peso:
+                changeFragment(new PesosFragment());
+                break;
+            case R.id.nav_temperatura:
+                changeFragment(new TemperaturasFragment());
                 break;
 
         }

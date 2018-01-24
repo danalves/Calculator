@@ -20,17 +20,17 @@
             android:text="DE"/>
 
         <Spinner
-            android:id="@+id/spMedidasDe"
+            android:id="@+id/spPesoDe"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:entries="@array/medidas">
+            android:entries="@array/pesos">
         </Spinner>
 
         <EditText
-            android:id="@+id/etMedidas1"
+            android:id="@+id/etPeso1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ex: 1.85"
+            android:hint="ex: 72"
             android:inputType="numberDecimal"/>
 
     </LinearLayout>
@@ -48,17 +48,17 @@
             android:text="PARA"/>
 
         <Spinner
-            android:id="@+id/spMedidasPara"
+            android:id="@+id/spPesoPara"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:entries="@array/medidas">
+            android:entries="@array/pesos">
         </Spinner>
 
         <EditText
-            android:id="@+id/etMedidas2"
+            android:id="@+id/etPeso2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ex: 1.85"
+            android:hint="ex: 72"
             android:inputType="numberDecimal"/>
 
     </LinearLayout>
